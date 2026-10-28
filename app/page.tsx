@@ -413,11 +413,12 @@ export default function Home() {
         {isMuted ? 'SOM OFF' : 'SOM ON'}
       </button>
 
-      <Canvas shadows camera={{ position: [0, 0, 10], fov: 35 }} gl={{ antialias: false, toneMapping: THREE.ReinhardToneMapping, toneMappingExposure: 1.2 }}>
+      <Canvas shadows dpr={[1, 1.5]} camera={{ position: [0, 0, 10], fov: 35 }} gl={{ antialias: false, toneMapping: THREE.ReinhardToneMapping, toneMappingExposure: 1.2 }}>
         <color attach="background" args={['#1a0b2e']} />
         <fog attach="fog" args={['#1a0b2e', 5, 30]} />
 
-        <Environment preset="city" background={false} blur={1} />
+        {/* Mapa de ambiente hospedado no próprio site (256px, ~100 KB) em vez do preset "city" baixado de raw.githack.com (1,5 MB) */}
+        <Environment files="/city.hdr" background={false} blur={1} />
         <ambientLight intensity={0.4} />
 
         {/* Dramatic Lighting Key/Fill/Rim aligned with App Colors */}
