@@ -8,7 +8,6 @@ import * as THREE from 'three'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import useSound from 'use-sound'
 
 // Import new components
 import { Navbar } from './components/Navigation/Navbar'
@@ -378,20 +377,26 @@ export default function Home() {
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
-  const [playBg, { stop: stopBg }] = useSound('/ambient.mp3', {
-    loop: true,
-    volume: 0.5,
-  })
+  // Áudio só é baixado quando o usuário liga o som (antes eram 5 MB no carregamento inicial)
+  const audioRef = useRef<HTMLAudioElement | null>(null)
 
   const toggleSound = () => {
+    if (!audioRef.current) {
+      audioRef.current = new Audio('/ambient.mp3')
+      audioRef.current.loop = true
+      audioRef.current.volume = 0.5
+    }
     if (isMuted) {
-      playBg()
+      audioRef.current.play().catch(() => {})
       setIsMuted(false)
     } else {
-      stopBg()
+      audioRef.current.pause()
+      audioRef.current.currentTime = 0
       setIsMuted(true)
     }
   }
+
+  React.useEffect(() => () => audioRef.current?.pause(), [])
 
 
 
