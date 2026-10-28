@@ -6,6 +6,11 @@ const nextConfig = {
   // Cache para os arquivos pesados de /public (modelos 3D, áudio, imagens).
   // Antes era max-age=0: o navegador revalidava tudo a cada visita.
   // 1 dia de cache + 7 dias servindo do cache enquanto atualiza em segundo plano.
+  // A antiga página de Mentorias virou Planos
+  async redirects() {
+    return [{ source: '/mentorias', destination: '/planos', permanent: true }]
+  },
+
   async headers() {
     return [
       {

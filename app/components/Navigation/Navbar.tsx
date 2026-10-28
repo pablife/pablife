@@ -11,7 +11,7 @@ export function Navbar() {
 
     const navItems = [
         { label: 'Quem Somos', href: '/sobre' },
-        { label: 'Mentorias', href: '/mentorias' },
+        { label: 'Planos', href: '/planos' },
         { label: 'Profissionais', href: '/profissionais' },
         { label: 'Contato', href: '/contato' },
     ];

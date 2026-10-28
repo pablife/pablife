@@ -55,7 +55,7 @@ export default function Contato() {
             {[
               { q: "O app está disponível onde?", a: "Atualmente na App Store e Google Play. Busque por 'PABLIFE'." },
               { q: "É gratuito?", a: "Sim, com funcionalidades premium opcionais para quem quer acelerar resultados." },
-              { q: "Como agendo mentorias?", a: "Diretamente pelo app na aba 'Mentores'. É instantâneo." },
+              { q: "Quais são os planos?", a: "Lite (1 consulta), Plus (3 consultas) e Premium (5 consultas), todos com o app completo. A assinatura é feita pelo próprio app." },
               { q: "Meus dados são seguros?", a: "Criptografia de ponta a ponta. Sua privacidade é inegociável." }
             ].map((faq, i) => (
               <div key={i} className="pb-6 border-b border-white/5 last:border-0 last:pb-0 hover:border-pink-500/20 transition-all">
