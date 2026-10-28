@@ -531,7 +531,7 @@ export default function Home() {
                   </div>
                   <div className="features-grid grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 md:pb-0">
                     {[
-                      { num: "01", title: "Psicologia", desc: "Suporte especializado para fortalecer sua inteligência emocional.", img: "/medusa.png" },
+                      { num: "01", title: "Psicologia", desc: "Suporte especializado para fortalecer sua inteligência emocional.", img: "/medusa-premium.png" },
                       { num: "02", title: "Nutrição", desc: "Planos alimentares focados em performance e longevidade.", img: "/estatua.png" },
                       { num: "03", title: "ORGANIZAÇÃO ", desc: "O app que organiza sua rotina, metas e evolução.", img: "/woman.png" }
                     ].map((feature) => (
