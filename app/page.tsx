@@ -8,7 +8,6 @@ import * as THREE from 'three'
 import gsap from 'gsap'
 import { useGSAP } from '@gsap/react'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
-import useSound from 'use-sound'
 
 // Import new components
 import { Navbar } from './components/Navigation/Navbar'
@@ -378,20 +377,26 @@ export default function Home() {
     return () => window.removeEventListener('resize', checkMobile)
   }, [])
 
-  const [playBg, { stop: stopBg }] = useSound('/ambient.mp3', {
-    loop: true,
-    volume: 0.5,
-  })
+  // Áudio só é baixado quando o usuário liga o som (antes eram 5 MB no carregamento inicial)
+  const audioRef = useRef<HTMLAudioElement | null>(null)
 
   const toggleSound = () => {
+    if (!audioRef.current) {
+      audioRef.current = new Audio('/ambient.mp3')
+      audioRef.current.loop = true
+      audioRef.current.volume = 0.5
+    }
     if (isMuted) {
-      playBg()
+      audioRef.current.play().catch(() => {})
       setIsMuted(false)
     } else {
-      stopBg()
+      audioRef.current.pause()
+      audioRef.current.currentTime = 0
       setIsMuted(true)
     }
   }
+
+  React.useEffect(() => () => audioRef.current?.pause(), [])
 
 
 
@@ -408,11 +413,12 @@ export default function Home() {
         {isMuted ? 'SOM OFF' : 'SOM ON'}
       </button>
 
-      <Canvas shadows camera={{ position: [0, 0, 10], fov: 35 }} gl={{ antialias: false, toneMapping: THREE.ReinhardToneMapping, toneMappingExposure: 1.2 }}>
+      <Canvas shadows dpr={[1, 1.5]} camera={{ position: [0, 0, 10], fov: 35 }} gl={{ antialias: false, toneMapping: THREE.ReinhardToneMapping, toneMappingExposure: 1.2 }}>
         <color attach="background" args={['#1a0b2e']} />
         <fog attach="fog" args={['#1a0b2e', 5, 30]} />
 
-        <Environment preset="city" background={false} blur={1} />
+        {/* Mapa de ambiente hospedado no próprio site (256px, ~100 KB) em vez do preset "city" baixado de raw.githack.com (1,5 MB) */}
+        <Environment files="/city.hdr" background={false} blur={1} />
         <ambientLight intensity={0.4} />
 
         {/* Dramatic Lighting Key/Fill/Rim aligned with App Colors */}
@@ -526,7 +532,7 @@ export default function Home() {
                   </div>
                   <div className="features-grid grid grid-cols-1 md:grid-cols-3 gap-8 pb-8 md:pb-0">
                     {[
-                      { num: "01", title: "Psicologia", desc: "Suporte especializado para fortalecer sua inteligência emocional.", img: "/medusa.png" },
+                      { num: "01", title: "Psicologia", desc: "Suporte especializado para fortalecer sua inteligência emocional.", img: "/medusa-premium.png" },
                       { num: "02", title: "Nutrição", desc: "Planos alimentares focados em performance e longevidade.", img: "/estatua.png" },
                       { num: "03", title: "ORGANIZAÇÃO ", desc: "O app que organiza sua rotina, metas e evolução.", img: "/woman.png" }
                     ].map((feature) => (

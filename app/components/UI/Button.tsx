@@ -8,8 +8,6 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   glow?: boolean;
 }
 
-import useSound from 'use-sound';
-
 // Note: You need to add sound files to /public/sounds/
 // or use a base64 string. 
 
