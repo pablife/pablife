@@ -60,8 +60,12 @@ export default function Profissionais() {
                   icon: '🥗',
                   title: 'Nutricionistas',
                   desc: 'Engenharia nutricional. Planos alimentares para performance e longevidade.',
-                  specialties: ['Emagrecimento', 'Hipertrofia', 'Saúde Metabólica', 'Nutrição Esportiva'],
-                  demands: [] as string[],
+                  demands: [
+                    'Emagrecimento', 'Ganho de Massa Muscular', 'Reeducação Alimentar', 'Diabetes', 'Hipertensão',
+                    'Colesterol Alto', 'Saúde Intestinal', 'Intolerâncias Alimentares', 'Compulsão Alimentar',
+                    'SOP', 'Gestação', 'Alimentação Vegetariana', 'Performance Esportiva', 'Energia e Disposição',
+                  ],
+                  specialties: ['Nutrição Clínica', 'Nutrição Esportiva', 'Nutrição Comportamental', 'Nutrição Funcional'],
                   color: 'cyan' as const
                 },
               ].map((pro) => (
