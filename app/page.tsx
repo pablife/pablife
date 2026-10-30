@@ -13,6 +13,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { Navbar } from './components/Navigation/Navbar'
 import { Button } from './components/UI/Button'
 import { Card } from './components/UI/Card'
+import { AppWebButton } from './components/UI/AppWebButton'
 import { Squares } from './components/Effects/Squares'
 import Link from 'next/link'
 
@@ -472,11 +473,7 @@ export default function Home() {
                         BAIXAR APP
                       </Button>
                     </a>
-                    <a href="https://www.instagram.com/pablife_app/" target="_blank" rel="noopener noreferrer" className="w-full md:w-auto">
-                      <Button variant="outline" size="lg" className="w-full md:w-auto">
-                        INSTAGRAM
-                      </Button>
-                    </a>
+                    <AppWebButton className="w-full md:w-auto" />
                   </div>
                 </div>
               </Section>
@@ -560,9 +557,12 @@ export default function Home() {
                   <h3 className="text-5xl md:text-8xl font-black mb-12 uppercase italic tracking-tighter leading-none">
                     "Não é sorte.<br />É <span className="text-cyan-400">método</span>."
                   </h3>
-                  <a href="https://apps.apple.com/br/app/pablife-app/id6756442379" target="_blank" rel="noopener noreferrer" className="block">
-                    <Button variant="secondary" size="lg" glow className="w-full md:w-auto md:min-w-[300px] text-base md:text-lg py-4 md:py-6 px-6 md:px-10">BAIXAR PABLIFE</Button>
-                  </a>
+                  <div className="flex flex-col items-center gap-5 w-full md:w-[440px] mx-auto">
+                    <AppWebButton className="w-full py-4 md:py-6 px-6" />
+                    <a href="https://apps.apple.com/br/app/pablife-app/id6756442379" target="_blank" rel="noopener noreferrer" className="block w-full">
+                      <Button variant="secondary" size="lg" glow className="w-full text-base md:text-lg py-4 md:py-6 px-6">BAIXAR PABLIFE</Button>
+                    </a>
+                  </div>
                 </div>
               </Section>
 

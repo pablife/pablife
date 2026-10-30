@@ -22,6 +22,99 @@
   to { width: 100%; opacity: 1; }
 }
 
+/* ---------- Botão "Acessar App Web" ---------- */
+@property --appweb-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@layer components {
+.appweb-btn {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 1.25rem 2.5rem;
+  font-family: var(--font-mono), ui-monospace, monospace;
+  font-weight: 700;
+  font-size: 0.875rem;
+  letter-spacing: 0.14em;
+  white-space: nowrap;
+  text-transform: uppercase;
+  color: #fff;
+  text-decoration: none;
+  border: 2px solid transparent;
+  background:
+    linear-gradient(135deg, rgba(40, 6, 40, 0.95), rgba(10, 4, 30, 0.95)) padding-box,
+    conic-gradient(from var(--appweb-angle), #ff0055, #b026ff, #00ffff, #b026ff, #ff0055) border-box;
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.6);
+  animation: appweb-spin 3s linear infinite, appweb-glow 2.4s ease-in-out infinite;
+  transition: transform 0.25s ease, filter 0.25s ease;
+}
+@media (min-width: 768px) {
+  .appweb-btn { font-size: 1rem; letter-spacing: 0.2em; }
+}
+.appweb-btn:hover,
+.appweb-btn:focus-visible {
+  transform: translateY(-2px) scale(1.03);
+  filter: brightness(1.2);
+}
+.appweb-btn:focus-visible {
+  outline: 2px solid #00ffff;
+  outline-offset: 4px;
+}
+}
+
+/* reflexo que atravessa o botão */
+.appweb-shine {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+}
+.appweb-shine::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: -60%;
+  width: 45%;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, 0.28), transparent);
+  transform: skewX(-20deg);
+  animation: appweb-shine 3.2s ease-in-out infinite;
+}
+
+.appweb-ping {
+  animation: appweb-ping 1.6s cubic-bezier(0, 0, 0.2, 1) infinite;
+  opacity: 0.75;
+}
+
+@keyframes appweb-spin {
+  to { --appweb-angle: 360deg; }
+}
+@keyframes appweb-glow {
+  0%, 100% { box-shadow: 0 0 18px rgba(255, 0, 85, 0.45), 0 0 40px rgba(176, 38, 255, 0.25); }
+  50% { box-shadow: 0 0 28px rgba(0, 255, 255, 0.55), 0 0 70px rgba(255, 0, 85, 0.45); }
+}
+@keyframes appweb-shine {
+  0%, 55% { left: -60%; }
+  100% { left: 130%; }
+}
+@keyframes appweb-ping {
+  75%, 100% { transform: scale(2.4); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .appweb-btn,
+  .appweb-shine::before,
+  .appweb-ping { animation: none; }
+  .appweb-btn { box-shadow: 0 0 24px rgba(255, 0, 85, 0.5); }
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
