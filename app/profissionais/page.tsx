@@ -7,6 +7,19 @@ import Link from 'next/link';
 import { Reveal } from "../components/UI/Reveal";
 import { Squares } from "../components/Effects/Squares";
 
+const tone = {
+  pink: {
+    border: 'hover:border-pink-500/50',
+    glow: 'bg-pink-500/20',
+    chip: 'bg-pink-500/10 border border-pink-500/40 text-pink-400 hover:bg-pink-500/20',
+  },
+  cyan: {
+    border: 'hover:border-cyan-500/50',
+    glow: 'bg-cyan-500/20',
+    chip: 'bg-cyan-500/10 border border-cyan-500/40 text-cyan-400 hover:bg-cyan-500/20',
+  },
+} as const;
+
 export default function Profissionais() {
   return (
     <PageWrapper backgroundEffect={<Squares color="#00ffff" opacity={0.15} speed={0.8} />}>
@@ -35,29 +48,52 @@ export default function Profissionais() {
                   icon: '🧠',
                   title: 'Psicólogos',
                   desc: 'Blindagem mental. Controle de ansiedade e foco absoluto.',
-                  specialties: ['Ansiedade', 'Depressão', 'Autoestima', 'Relacionamentos'],
-                  color: 'pink'
+                  demands: [
+                    'Ansiedade', 'Depressão', 'Estresse', 'Burnout', 'Síndrome do Pânico', 'TOC',
+                    'TDAH', 'Fobias', 'Insônia', 'Luto', 'Traumas', 'Autoestima',
+                    'Relacionamentos', 'Dependência Emocional', 'Conflitos Familiares', 'Procrastinação',
+                  ],
+                  specialties: ['TCC', 'Psicanálise', 'Neuropsicologia', 'TAC', 'Mindfulness'],
+                  color: 'pink' as const
                 },
                 {
                   icon: '🥗',
                   title: 'Nutricionistas',
                   desc: 'Engenharia nutricional. Planos alimentares para performance e longevidade.',
-                  specialties: ['Emagrecimento', 'Hipertrofia', 'Saúde Metabólica', 'Nutrição Esportiva'],
-                  color: 'cyan'
+                  demands: [
+                    'Emagrecimento', 'Ganho de Massa Muscular', 'Reeducação Alimentar', 'Diabetes', 'Hipertensão',
+                    'Colesterol Alto', 'Saúde Intestinal', 'Intolerâncias Alimentares', 'Compulsão Alimentar',
+                    'SOP', 'Gestação', 'Alimentação Vegetariana', 'Performance Esportiva', 'Energia e Disposição',
+                  ],
+                  specialties: ['Nutrição Clínica', 'Nutrição Esportiva', 'Nutrição Comportamental', 'Nutrição Funcional'],
+                  color: 'cyan' as const
                 },
               ].map((pro) => (
-                <Card key={pro.title} className={`group hover:border-${pro.color}-500/50 transition-all duration-500 relative overflow-hidden`}>
-                  <div className={`absolute inset-0 bg-${pro.color}-500/20 blur-[50px] opacity-0 group-hover:opacity-50 transition-opacity`}></div>
+                <Card key={pro.title} className={`group ${tone[pro.color].border} transition-all duration-500 relative overflow-hidden`}>
+                  <div className={`absolute inset-0 ${tone[pro.color].glow} blur-[50px] opacity-0 group-hover:opacity-50 transition-opacity`}></div>
                   <div className="relative z-10">
                     <div className="text-6xl mb-6 group-hover:scale-110 transition-transform duration-300">{pro.icon}</div>
                     <h3 className="text-3xl font-black text-white mb-3 uppercase tracking-tighter">{pro.title}</h3>
                     <p className="text-sm text-gray-400 leading-relaxed mb-6">{pro.desc}</p>
 
+                    {pro.demands.length > 0 && (
+                      <div className="space-y-2 mb-6">
+                        <p className="text-xs font-mono text-cyan-400 uppercase tracking-widest mb-3">Demandas que atendemos:</p>
+                        <div className="flex flex-wrap gap-2">
+                          {pro.demands.map((d) => (
+                            <span key={d} className="px-3 py-1 bg-white/5 border border-white/15 rounded-full text-xs font-mono tracking-wider text-white/80">
+                              {d}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
                     <div className="space-y-2">
                       <p className="text-xs font-mono text-cyan-400 uppercase tracking-widest mb-3">Especialidades:</p>
                       <div className="flex flex-wrap gap-2">
                         {pro.specialties.map((spec) => (
-                          <span key={spec} className={`px-3 py-1 bg-${pro.color}-500/10 border border-${pro.color}-500/30 rounded-full text-xs font-mono tracking-wider text-${pro.color}-400 hover:bg-${pro.color}-500/20 transition-all`}>
+                          <span key={spec} className={`px-3 py-1 rounded-full text-xs font-mono font-bold tracking-wider transition-all ${tone[pro.color].chip}`}>
                             {spec}
                           </span>
                         ))}
