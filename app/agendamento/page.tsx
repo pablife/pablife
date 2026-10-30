@@ -147,7 +147,7 @@ export default function Agendamento() {
               <strong style={styles.infoLabel}>Suporte:</strong>
               <span style={styles.infoText}>
                 Em caso de dúvidas sobre agendamentos, entre em contato com nosso suporte através
-                do email <a href="mailto:Suporte@pablife.com.br" style={styles.link}>Suporte@pablife.com.br</a>.
+                do email <a href="mailto:pablifeapp@pablife.com.br" style={styles.link}>pablifeapp@pablife.com.br</a>.
               </span>
             </div>
           </div>
